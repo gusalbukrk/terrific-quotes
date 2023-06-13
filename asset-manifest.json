@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/quotes/static/css/main.42c03d70.css",
-    "main.js": "/quotes/static/js/main.386309f1.js",
+    "main.js": "/quotes/static/js/main.383e4fd3.js",
     "static/js/787.43cbfe13.chunk.js": "/quotes/static/js/787.43cbfe13.chunk.js",
     "static/media/Genghis Khan.jpg": "/quotes/static/media/Genghis Khan.3e2e4c53fe3787dd90fe.jpg",
     "static/media/Ferdinand Marcos.jpg": "/quotes/static/media/Ferdinand Marcos.a6310bf5f05cefc8473e.jpg",
@@ -47,11 +47,11 @@
     "static/media/Pol Pot.jpg": "/quotes/static/media/Pol Pot.74593632f9f605c1f779.jpg",
     "index.html": "/quotes/index.html",
     "main.42c03d70.css.map": "/quotes/static/css/main.42c03d70.css.map",
-    "main.386309f1.js.map": "/quotes/static/js/main.386309f1.js.map",
+    "main.383e4fd3.js.map": "/quotes/static/js/main.383e4fd3.js.map",
     "787.43cbfe13.chunk.js.map": "/quotes/static/js/787.43cbfe13.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.42c03d70.css",
-    "static/js/main.386309f1.js"
+    "static/js/main.383e4fd3.js"
   ]
 }
