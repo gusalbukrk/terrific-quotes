@@ -36,6 +36,17 @@ function getAllTags() {
   return Array.from(new Set(db.quotes.map(q => q[3]).flat())).sort();
 }
 
+function getTagsFrequency() {
+  const tags = Array.from(new Set(db.quotes.map(q => q[3]).flat())).sort();
+
+  const frequency = tags.reduce((freq, tag) => {
+    freq[tag] = db.quotes.filter(q => q[3].includes(tag)).length;
+    return freq;
+  }, {});
+
+  return frequency;
+}
+
 function App() {
   return (
     <div className="App">
@@ -53,30 +64,38 @@ function App() {
   );
 }
 
-function TagsSection({ tags }) {
-  return (<section className="tags">{tags.map((t, i) => <a key={i} href={`/quotes/#/tags/${tags[i]}`}>{t}</a>)}</section>);
-}
-
 function AuthorSection({ author, bio }) {
   return (
     <section className='author'>
       <img src={require(`./pics/${author}.jpg`)} alt={author} />
       <section>
-        <h3 className="authorName">– <a href={`/quotes/#/authors/${author}`}>{author}</a></h3>
+        <h3 className="authorName"><a href={`/quotes/#/authors/${author}`}>{author}</a></h3>
         <h4 className="bio">known for {bio}</h4>
       </section>
     </section>
   );
 }
 
+function TagsSection({ tags, freq }) {
+  return (
+    <section className="tags">
+      {tags.map((t, i) =>
+        <span><a key={i} href={`/quotes/#/tags/${tags[i]}`}>{t}</a>{freq && <span className="freq">({freq[i]})</span>}</span>)
+      }
+    </section>
+  );
+}
+
 function Quote({ quote, displayAuthorSection = true }) {
   return (
-    <article className="quote-container">
-      <h2 className="quote"><span>“</span>{quote.quote}<span>”</span></h2>
-      { displayAuthorSection && <AuthorSection author={quote.author} bio={quote.bio} /> }
-      <TagsSection tags={quote.tags} />
-      <hr></hr>
-    </article>
+    <>
+      <article className="quote-container">
+        <h2 className="quote"><span>“</span>{quote.quote}<span>”</span></h2>
+        { displayAuthorSection && <AuthorSection author={quote.author} bio={quote.bio} /> }
+        <TagsSection tags={quote.tags} />
+      </article>
+      <hr />
+    </>
   );
 }
 
@@ -98,7 +117,7 @@ function Authors() {
   const authors = db.authors;
 
   return (
-    <main>
+    <main id="AuthorsPage">
       <h2>Authors</h2>
       { authors.map((author, index) => <AuthorSection author={author[1]} bio={getRandomArrayItem(author[2])} />) }
     </main>
@@ -112,7 +131,7 @@ function Author() {
   const quotes = getQuotesByAuthor(author);
 
   return (
-    <main>
+    <main id="AuthorPage">
       <AuthorSection author={author} bio={bio} />
       {quotes.map((quote, index) => (
         <Quote key={index} quote={quote} displayAuthorSection={false} />
@@ -122,12 +141,14 @@ function Author() {
 }
 
 function Tags() {
-  const tags = getAllTags();
+  const frequency = getTagsFrequency();
+  const tags = Object.keys(frequency);
+  const freq = Object.values(frequency);
 
   return (
-    <main>
+    <main id="TagsPage">
       <h2>Tags</h2>
-      <TagsSection tags={tags} />
+      <TagsSection tags={tags} freq={freq} />
     </main>
   );
 }
@@ -137,7 +158,8 @@ function Tag() {
   const quotes = getQuotesByTag(tag);
 
   return (
-    <main>
+    <main id="TagPage">
+      <h2 id="title">Tag:<span>{tag}</span></h2>
       {quotes.map((quote, index) => (
         <Quote key={index} quote={quote} />
       ))}

@@ -1,3 +1,18 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(0, 0, 128);
+}
+
 header {
   margin-bottom: 5rem;
   text-align: center;
@@ -5,7 +20,7 @@ header {
 }
 
 header h1 {
-  line-height: 120%;
+  line-height: 150%;
 }
 
 .quote-container {
@@ -16,23 +31,25 @@ header h1 {
   margin-bottom: 5rem;
 }
 
-.quote-container hr {
-  margin-top: 3rem;
+.quote-container + hr {
   border-color: lightgray;
   width: 50%;
+  margin: 0 auto;
+  margin-bottom: 3rem;
 }
 
-.quote-container:last-of-type hr {
+.quote-container + hr:last-of-type {
   display: none;
 }
 
 h2.quote {
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 }
 
 h2.quote span {
-  color: rgba(0, 0, 0, .8);
+  color: rgba(0, 0, 0, .75);
   font-size: 120%;
+  user-select: none;
 }
 
 h2.quote span:first-of-type {
@@ -43,21 +60,11 @@ h2.quote span:last-of-type {
   margin-left: 0.25rem;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 1rem;
-  row-gap: .5rem;
-}
-
-.tags a::before {
-  content: "#";
-}
-
-.author {
+section.author {
   display: flex;
   column-gap: 1rem;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .author img {
@@ -70,8 +77,30 @@ h2.quote span:last-of-type {
   margin-bottom: .5rem;
 }
 
-.bio {
-  margin-top: 0;
+.authorName::before {
+  content: "– ";
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1rem;
+  row-gap: .5rem;
+}
+
+.tags a {
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+
+.tags a::before {
+  content: "#";
+  margin-right: .1rem;
+}
+
+.tags .freq {
+  font-size: 0.9rem;
+  vertical-align: middle;
 }
 
 button#more {
@@ -79,26 +108,74 @@ button#more {
   text-transform: uppercase;
   margin: 0 auto;
   display: block;
-  border: none;
   cursor: pointer;
   font-weight: bold;
   padding: .5rem 1rem;
-  transition: all .3s ease-in-out;
   border: 2px solid #000;
+  color: blue;
 }
 
 button#more:hover {
-  background-color: #e6e6e6;
+  color: rgb(0, 0, 128);
 }
 
 button#more::before {
   content: "+";
   margin-right: .5rem;
+  font-size: 1.25rem;
+}
+
+#AuthorPage .author {
+  margin-bottom: 5rem;
+}
+
+#AuthorsPage h2 {
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+#AuthorsPage .author {
+  margin-bottom: 3rem;
+}
+
+#AuthorsPage .authorName::before {
+  content: none;
+}
+
+#TagsPage h2 {
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+#TagsPage .tags {
   font-size: 1.2rem;
 }
 
+#tag {
+  margin-bottom: 3rem;
+}
+
+#tag::before {
+  content: "#";
+  margin-right: 0.2rem;
+}
+
+#TagPage #title {
+  margin-bottom: 5rem;
+}
+
+#TagPage #title span {
+  color: blue;
+  margin-left: 0.5rem;
+}
+
+#TagPage #title span::before {
+  content: "#";
+  margin-right: 0.1rem;
+}
+
 @media(max-width: 420px) {
-  header {
+  header, .quote-container:last-of-type, #AuthorPage .author, #TagPage #title {
     margin-bottom: 3rem;
   }
 }
