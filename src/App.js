@@ -20,11 +20,9 @@ function App() {
         <h1>terrific quotes by terrible people</h1>
       </header>
       <Routes>
-        <Route path='quotes'>
-          <Route path='' element={<Home />} />
-          <Route path='tags' element={<Tags />} />
-          <Route path='tags/:tag' element={<Tag />} />
-        </Route>
+        <Route path='/' element={<Home />} />
+        <Route path='/tags' element={<Tags />} />
+        <Route path='/tags/:tag' element={<Tag />} />
       </Routes>
     </div>
   );
