@@ -50,7 +50,7 @@ h2.quote span:last-of-type {
   row-gap: .5rem;
 }
 
-.tags span::before {
+.tags a::before {
   content: "#";
 }
 
