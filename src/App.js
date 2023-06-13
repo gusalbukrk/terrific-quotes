@@ -22,9 +22,14 @@ function App() {
       </header>
       {quotes.map((quote, index) => (
         <article key={index} className="quote-container">
-          <h2 className="quote">{quote.quote}</h2>
-          <h3 className="author">– {quote.author}</h3>
-          <h4 className="bio">known for {quote.bio}</h4>
+          <h2 className="quote"><span>“</span>{quote.quote}<span>”</span></h2>
+          <section className='author'>
+            <img src={require(`./pics/${quote.author}.jpg`)} />
+            <section>
+              <h3 className="authorName">– {quote.author}</h3>
+              <h4 className="bio">known for {quote.bio}</h4>
+            </section>
+          </section>
           <section className="tags">{quote.tags.map((t, i) => <span key={i}>{t}</span>)}</section>
           <hr></hr>
         </article>
