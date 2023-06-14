@@ -7,11 +7,11 @@ import { Routes, Route, useParams } from 'react-router-dom';
 const getRandomArrayItem = arr => arr[Math.floor(Math.random() * arr.length)];
 
 function createQuoteObj(quote, author) {
-  return { author: author[1], bio: getRandomArrayItem(author[2]), quote: quote[2], tags: quote[3] };
+  return { id: quote[0], author: author[1], bio: getRandomArrayItem(author[2]), quote: quote[2], tags: quote[3] };
 }
 
 function findQuoteAuthor(quote) {
-  return db.authors.find(a => a[0] === quote[0]);
+  return db.authors.find(a => a[0] === quote[1]);
 }
 
 function getRandomQuote() {
@@ -21,7 +21,7 @@ function getRandomQuote() {
 
 function getQuotesByAuthor(authorName) {
   const author = db.authors.find(a => a[1] === authorName);
-  const quotes = db.quotes.filter(q => q[0] === author[0]).map(q => createQuoteObj(q, author));
+  const quotes = db.quotes.filter(q => q[1] === author[0]).map(q => createQuoteObj(q, author));
 
   return quotes;
 }
@@ -30,10 +30,6 @@ function getQuotesByTag(tag) {
   const quotes = db.quotes.filter(q => q[3].includes(tag)).map(q => createQuoteObj(q, findQuoteAuthor(q)));
 
   return quotes;
-}
-
-function getAllTags() {
-  return Array.from(new Set(db.quotes.map(q => q[3]).flat())).sort();
 }
 
 function getTagsFrequency() {
@@ -80,7 +76,7 @@ function TagsSection({ tags, freq }) {
   return (
     <section className="tags">
       {tags.map((t, i) =>
-        <span><a key={i} href={`/quotes/#/tags/${tags[i]}`}>{t}</a>{freq && <span className="freq">({freq[i]})</span>}</span>)
+        <span key={i}><a href={`/quotes/#/tags/${tags[i]}`}>{t}</a>{freq && <span className="freq">({freq[i]})</span>}</span>)
       }
     </section>
   );
@@ -104,8 +100,8 @@ function Home() {
 
   return (
     <main>
-      {quotes.map((quote, index) => (
-        <Quote key={index} quote={quote} />
+      {quotes.map(quote => (
+        <Quote key={quote.id} quote={quote} />
       ))}
 
       <button id="more" onClick={() => setQuotes([...quotes, ...[ ...Array(3) ].map(() => getRandomQuote())])}>Load 3 More</button>
