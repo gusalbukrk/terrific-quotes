@@ -1,8 +1,8 @@
 import './App.css';
 import db from './db.min.json';
 
-import { useState } from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useParams, useLocation } from 'react-router-dom';
 
 const getRandomArrayItem = arr => arr[Math.floor(Math.random() * arr.length)];
 
@@ -44,10 +44,23 @@ function getTagsFrequency() {
 }
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div className="App">
       <header>
-        <h1><a href="/quotes/#">terrific quotes by terrible people</a></h1>
+        <h1><a href="/quotes/#" className={location.pathname === '/' ? 'a-disabled' : undefined}>terrific quotes by terrible people</a></h1>
+        <nav>
+          <a href="/quotes/#/authors" className={location.pathname === '/authors' ? 'a-disabled' : undefined}>Authors</a>
+          <span>&#9679;</span>
+          <a href="/quotes/#/tags" className={location.pathname === '/tags' ? 'a-disabled' : undefined}>Tags</a>
+          <span>&#9679;</span>
+          <a href="https://github.com/gusalbukrk/quotes" target='_blank'><i className="fa-brands fa-github"></i></a>
+        </nav>
       </header>
       <Routes>
         <Route path='/' element={<Home />} />
@@ -104,7 +117,7 @@ function Home() {
         <Quote key={quote.id} quote={quote} />
       ))}
 
-      <button id="more" onClick={() => setQuotes([...quotes, ...[ ...Array(3) ].map(() => getRandomQuote())])}>Load 3 More</button>
+      <button id="more" onClick={() => setQuotes([...quotes, ...[ ...Array(3) ].map(() => getRandomQuote())])}><i class="fa-solid fa-plus fa-spin"></i>Load 3 More</button>
     </main>
   );
 }
@@ -115,7 +128,7 @@ function Authors() {
   return (
     <main id="AuthorsPage">
       <h2>Authors</h2>
-      { authors.map((author, index) => <AuthorSection author={author[1]} bio={getRandomArrayItem(author[2])} />) }
+      { authors.map((author, index) => <AuthorSection key={index} author={author[1]} bio={getRandomArrayItem(author[2])} />) }
     </main>
   );
 }
