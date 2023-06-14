@@ -59,7 +59,7 @@ function App() {
           <span>&#9679;</span>
           <a href="/quotes/#/tags" className={location.pathname === '/tags' ? 'a-disabled' : undefined}>Tags</a>
           <span>&#9679;</span>
-          <a href="https://github.com/gusalbukrk/quotes" target='_blank'><i className="fa-brands fa-github"></i></a>
+          <a href="https://github.com/gusalbukrk/quotes" target='_blank' rel="noreferrer"><i className="fa-brands fa-github"></i></a>
         </nav>
       </header>
       <Routes>
@@ -68,6 +68,7 @@ function App() {
         <Route path='/tags/:tag' element={<Tag />} />
         <Route path='/authors' element={<Authors />} />
         <Route path='/authors/:author' element={<Author />} />
+        <Route path='/:id' element={<QuotePage />} />
       </Routes>
     </div>
   );
@@ -99,7 +100,7 @@ function Quote({ quote, displayAuthorSection = true }) {
   return (
     <>
       <article className="quote-container">
-        <h2 className="quote"><span>“</span>{quote.quote}<span>”</span></h2>
+        <h2 className="quote"><a href={`/quotes/#/${quote.id}`}><i className="fa-solid fa-up-right-from-square"></i></a><span>“</span>{quote.quote}<span>”</span></h2>
         { displayAuthorSection && <AuthorSection author={quote.author} bio={quote.bio} /> }
         <TagsSection tags={quote.tags} />
       </article>
@@ -117,7 +118,28 @@ function Home() {
         <Quote key={quote.id} quote={quote} />
       ))}
 
-      <button id="more" onClick={() => setQuotes([...quotes, ...[ ...Array(3) ].map(() => getRandomQuote())])}><i class="fa-solid fa-plus fa-spin"></i>Load 3 More</button>
+      <button id="more" onClick={() => setQuotes([...quotes, ...[ ...Array(3) ].map(() => getRandomQuote())])}><i className="fa-solid fa-plus fa-spin"></i>Load 3 More</button>
+    </main>
+  );
+}
+
+function QuotePage() {
+  const { id } = useParams();
+  
+  const q = db.quotes.find(q => q[0] === Number(id));
+
+  if (q === undefined) {
+    return (<h2>No quote found.</h2>);
+  }
+
+  const a = db.authors.find(a => a[0] === q[1]);
+
+  const quote = createQuoteObj(q, a);
+
+  return (
+    <main id="QuotePage">
+      <h2 id="title"><span>Quote:</span><span>{id}</span></h2>
+      <Quote quote={quote} />
     </main>
   );
 }
@@ -141,6 +163,7 @@ function Author() {
 
   return (
     <main id="AuthorPage">
+      <h2 id="title"><span>Author:</span><span>{author}</span></h2>
       <AuthorSection author={author} bio={bio} />
       {quotes.map((quote, index) => (
         <Quote key={index} quote={quote} displayAuthorSection={false} />
@@ -168,7 +191,7 @@ function Tag() {
 
   return (
     <main id="TagPage">
-      <h2 id="title">Tag:<span>{tag}</span></h2>
+      <h2 id="title"><span>Tag:</span><span>{tag}</span></h2>
       {quotes.map((quote, index) => (
         <Quote key={index} quote={quote} />
       ))}

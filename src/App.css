@@ -85,6 +85,12 @@ h2.quote span:last-of-type {
   margin-left: 0.25rem;
 }
 
+h2.quote a {
+  margin-right: .75rem;
+  font-size: 80%;
+  vertical-align: top;
+}
+
 section.author {
   display: flex;
   column-gap: 1rem;
@@ -165,8 +171,16 @@ button#more:hover i {
   animation: fa-spin 1s 1 linear;
 }
 
+#QuotePage h2.quote a {
+  display: none;
+}
+
 #AuthorPage .author {
   margin-bottom: 4rem;
+}
+
+#AuthorPage .authorName {
+  display: none;
 }
 
 #AuthorPage .authorName a {
@@ -196,18 +210,26 @@ button#more:hover i {
   text-transform: uppercase;
 }
 
-#TagPage #title {
-  margin-bottom: 4rem;
+#title {
+  margin-bottom: 3rem;
 }
 
-#TagPage #title span {
+#title span:first-of-type {
+  text-transform: uppercase;
+  margin-right: 0.75rem;
+}
+
+#title span:last-of-type {
   color: blue;
-  margin-left: 0.5rem;
 }
 
-#TagPage #title span::before {
+#TagPage #title span:last-of-type::before, #QuotePage #title span:last-of-type::before {
   content: "#";
   margin-right: 0.1rem;
+}
+
+#AuthorPage #title {
+  margin-bottom: 2rem;
 }
 
 @media(max-width: 420px) {
