@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/quotes/static/css/main.81087dcd.css",
-    "main.js": "/quotes/static/js/main.841ccde6.js",
+    "main.css": "/quotes/static/css/main.89035982.css",
+    "main.js": "/quotes/static/js/main.70ca6794.js",
     "static/js/787.43cbfe13.chunk.js": "/quotes/static/js/787.43cbfe13.chunk.js",
     "static/media/Genghis Khan.jpg": "/quotes/static/media/Genghis Khan.3e2e4c53fe3787dd90fe.jpg",
     "static/media/Ferdinand Marcos.jpg": "/quotes/static/media/Ferdinand Marcos.a6310bf5f05cefc8473e.jpg",
@@ -46,12 +46,12 @@
     "static/media/Reinhard Heydrich.jpg": "/quotes/static/media/Reinhard Heydrich.7f3d1936a762dfa008b8.jpg",
     "static/media/Pol Pot.jpg": "/quotes/static/media/Pol Pot.74593632f9f605c1f779.jpg",
     "index.html": "/quotes/index.html",
-    "main.81087dcd.css.map": "/quotes/static/css/main.81087dcd.css.map",
-    "main.841ccde6.js.map": "/quotes/static/js/main.841ccde6.js.map",
+    "main.89035982.css.map": "/quotes/static/css/main.89035982.css.map",
+    "main.70ca6794.js.map": "/quotes/static/js/main.70ca6794.js.map",
     "787.43cbfe13.chunk.js.map": "/quotes/static/js/787.43cbfe13.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.81087dcd.css",
-    "static/js/main.841ccde6.js"
+    "static/css/main.89035982.css",
+    "static/js/main.70ca6794.js"
   ]
 }
