@@ -1,5 +1,5 @@
 import './App.css';
-import db from './db.json';
+import db from './db.min.json';
 
 import { useState } from 'react';
 import { Routes, Route, useParams } from 'react-router-dom';
